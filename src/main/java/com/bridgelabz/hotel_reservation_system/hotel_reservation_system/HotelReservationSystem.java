@@ -11,8 +11,8 @@ public class HotelReservationSystem {
 	public static ArrayList<Hotel> hotel = new ArrayList<Hotel>();
 
 	// This method is used to add hotel
-	public boolean addHotel(String hotelName, int rating, int regularWeekRate, int regularWeekendRate) {
-		hotel.add(new Hotel(hotelName, rating, regularWeekRate, regularWeekendRate));
+	public boolean addHotel(String hotelName, int rating, int regularCustomerWeekRate, int regularCustomerWeekendRate) {
+		hotel.add(new Hotel(hotelName, rating, regularCustomerWeekRate, regularCustomerWeekendRate));
 		return true;
 	}
 

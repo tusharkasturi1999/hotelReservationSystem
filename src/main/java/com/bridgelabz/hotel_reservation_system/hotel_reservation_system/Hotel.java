@@ -2,24 +2,23 @@ package com.bridgelabz.hotel_reservation_system.hotel_reservation_system;
 
 /**
  * @author tushar.kasturi_ymedi
- * @param hotelName          This stores the name of the hotel
- * @param regularWeekRate    This stores the weekday rates of regular customers
- * @param regularWeekendRate This stores rates of weekend rates of regular
- *                           customers
+ * @param hotelName          		 This stores the name of the hotel
+ * @param regularCustomerWeekRate    This stores the weekday rates of regular customers
+ * @param regularCustomerWeekendRate This stores rates of weekend rates of regular customers
  */
 public class Hotel {
 
 	String hotelName;
-	public int regularWeekRate;
-	public int regularWeekendRate;
+	public int regularCustomerWeekRate;
+	public int regularCustomerWeekendRate;
 	public int rating;
 
-	public Hotel(String hotelName, int rating, int regularWeekRate, int regularWeekendRate) {
+	public Hotel(String hotelName, int rating, int regularCustomerWeekRate, int regularCustomerWeekendRate) {
 		super();
 		this.rating = rating;
 		this.hotelName = hotelName;
-		this.regularWeekRate = regularWeekRate;
-		this.regularWeekendRate = regularWeekendRate;
+		this.regularCustomerWeekRate = regularCustomerWeekRate;
+		this.regularCustomerWeekendRate = regularCustomerWeekendRate;
 	}
 
 	public String getHotelName() {
@@ -30,20 +29,20 @@ public class Hotel {
 		this.hotelName = hotelName;
 	}
 
-	public int getRegularWeekRate() {
-		return regularWeekRate;
+	public int getRegularCustomerWeekRate() {
+		return regularCustomerWeekRate;
 	}
 
-	public void setRegularWeekRate(int regularWeekRate) {
-		this.regularWeekRate = regularWeekRate;
+	public void setRegularCustomerWeekRate(int regularCustomerWeekRate) {
+		this.regularCustomerWeekRate = regularCustomerWeekRate;
 	}
 
-	public int getRegularWeekendRate() {
-		return regularWeekendRate;
+	public int getRegularCustomerWeekendRate() {
+		return regularCustomerWeekendRate;
 	}
 
-	public void setRegularWeekendRate(int regularWeekendRate) {
-		this.regularWeekendRate = regularWeekendRate;
+	public void setRegularCustomerWeekendRate(int regularCustomerWeekendRate) {
+		this.regularCustomerWeekendRate = regularCustomerWeekendRate;
 	}
 
 	public int getRating() {
@@ -56,8 +55,8 @@ public class Hotel {
 
 	@Override
 	public String toString() {
-		return "Hotel [hotelName=" + hotelName + ", regularWeekRate=" + regularWeekRate + ", regularWeekendRate="
-				+ regularWeekendRate + ", rating=" + rating + "]";
+		return "Hotel [hotelName=" + hotelName + ", regularCustomerWeekRate=" + regularCustomerWeekRate + ", regularCustomerWeekendRate="
+				+ regularCustomerWeekendRate + ", rating=" + rating + "]";
 	}
 
 }
