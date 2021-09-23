@@ -8,13 +8,12 @@ package com.bridgelabz.hotel_reservation_system.hotel_reservation_system;
  */
 public class Hotel {
 
-	String hotelName;
+	public String hotelName;
 	public int regularCustomerWeekRate;
 	public int regularCustomerWeekendRate;
 	public int rating;
 
 	public Hotel(String hotelName, int rating, int regularCustomerWeekRate, int regularCustomerWeekendRate) {
-		super();
 		this.rating = rating;
 		this.hotelName = hotelName;
 		this.regularCustomerWeekRate = regularCustomerWeekRate;
