@@ -1,9 +1,12 @@
 package com.bridgelabz.hotel_reservation_system.hotel_reservation_system;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.*;
  
 /**
  * This is the HotelReservationSystem class
@@ -26,31 +29,62 @@ public class HotelReservationSystem {
 		return hotel.size();
 	}
 	
+	/**
+	 * to check if a date is weekday or weekend
+	 * @param day
+	 * @return true for weekends
+	 */
+	public static boolean checkWeekend(DayOfWeek day) {
+		switch (day) {
+		case SATURDAY:
+			return true;
+		case SUNDAY:
+			return true;
+		default:
+			return false;
+		}
+	}
 	//This method returns the cheapest hotel
-	public static String findCheapestHotel(String lowerRange, String upperRange) {
+	public static String findCheapestHotel(String lowerRange,String upperRange) {
 
-		HashMap<String, Integer> hotelRateMap = new HashMap<>();
-		int min = Integer.MAX_VALUE;
+		HashMap<String,Integer> hotelRateMap = new HashMap<>();
+		int minTotalRate = Integer.MAX_VALUE;
 		String cheapHotel = null;
 
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("ddMMMyyyy");
 		LocalDate lower = LocalDate.parse(lowerRange, format);
 		LocalDate upper = LocalDate.parse(upperRange, format);
-		int numDays = Period.between(lower, upper).getDays();
+		long numDays = Period.between(lower, upper).getDays()+1;
 
-		for (Hotel hotel : hotel) {
+		List<LocalDate> listOfDates = Stream.iterate(lower, date -> date.plusDays(1))
+				.limit(numDays)
+				.collect(Collectors.toList());
+
+		for(Hotel hotel: hotel) {
 			int totalRate = 0;
-			for (int i = 0; i < numDays; i++) {
-				totalRate += hotel.getRegularCustomerWeekRate();
+			for(LocalDate date : listOfDates)
+			{
+				if(checkWeekend(date.getDayOfWeek())) 
+				{
+					totalRate += hotel.getRegularCustomerWeekendRate();
+				}
+				else
+					totalRate += hotel.getRegularCustomerWeekRate();
 			}
-			hotelRateMap.put(hotel.getHotelName(), totalRate);
+			hotelRateMap.put(hotel.getHotelName(),totalRate);
 		}
-		for (Map.Entry map : hotelRateMap.entrySet()) {
-			if (min > (int) map.getValue()) {
-				min = (int) map.getValue();
-				cheapHotel = (String) map.getKey();
+
+		for (Map.Entry map : hotelRateMap.entrySet()) {      
+			if(minTotalRate > (int)map.getValue()) 
+			{
+				minTotalRate = (int)map.getValue();
+				cheapHotel = (String)map.getKey();
+			}
+			else if(minTotalRate == (int)map.getValue()){
+				cheapHotel = cheapHotel + ","+ map.getKey();
 			}
 		}
+		System.out.println("Cheapest hotel for the given dates is "+cheapHotel+" for $"+minTotalRate);
 		return cheapHotel;
 	}
 }

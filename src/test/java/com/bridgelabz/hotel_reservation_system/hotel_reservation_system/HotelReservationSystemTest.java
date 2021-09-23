@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
+ 
 /**
  * Unit test for HotelReservationSystemTest.
  */
@@ -20,9 +20,10 @@ public class HotelReservationSystemTest {
 	}
 
 	@Test
-	public void checkCheapestHotelWhenGivenDateRange() {
-		String cheapHotel = HotelReservationSystem.findCheapestHotel("12Sep2020", "15Sep2020");
-		assertEquals("LakeWood", cheapHotel);
+	public void checkCheapestHotelWhenGivenDateRange() 
+	{
+		String cheapHotel = HotelReservationSystem.findCheapestHotel("11Sep2020","12Sep2020");
+		assertEquals("LakeWood,Bridgewood",cheapHotel);
 	}
 
 }
