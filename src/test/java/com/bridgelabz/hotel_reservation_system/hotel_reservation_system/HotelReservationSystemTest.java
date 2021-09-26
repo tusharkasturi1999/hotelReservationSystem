@@ -17,15 +17,50 @@ public class HotelReservationSystemTest {
 	}
 
 	@Test
-	public void checkCheapestHotelWhenGivenDateRangeForRegularCustomer() {
-		String cheapHotel = hotelSystem.findCheapestHotel("Regular", "11Sep2020", "12Sep2020");
-		Assert.assertEquals("Bridgewood", cheapHotel);
+	public void checkCheapestHotelWhenGivenDateRangeForRegularCustomer() 
+	{
+		String cheapHotel;
+		try {
+			cheapHotel = hotelSystem.findCheapestHotel("Regular","11Sep2020","12Sep2020");
+			Assert.assertEquals("Bridgewood",cheapHotel);
+		} catch (HotelReservationException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Test
-	public void checkCheapestHotelWhenGivenDateRangeForRewardCustomer() {
-		String cheapHotel = hotelSystem.findCheapestHotel("Reward", "11Sep2020", "12Sep2020");
-		Assert.assertEquals("Ridgewood", cheapHotel);
+	public void checkCheapestHotelWhenGivenDateRangeForRewardCustomer() 
+	{
+		String cheapHotel;
+		try {
+			cheapHotel = hotelSystem.findCheapestHotel("Reward","11Sep2020","12Sep2020");
+			Assert.assertEquals("Ridgewood",cheapHotel);
+		} catch (HotelReservationException e) {
+			System.out.println(e.getMessage());
+		}
 	}
-
+	
+	@Test
+	public void checkGivenWrongDateRangeShouldHandleException() 
+	{
+		String cheapHotel;
+		try {
+			cheapHotel = hotelSystem.findCheapestHotel("Reward","11Sep2020","8Sep2020");
+			Assert.assertEquals("Ridgewood",cheapHotel);
+		} catch (HotelReservationException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void checkGivenWrongCustomerTypeShouldHandleException() 
+	{
+		String cheapHotel;
+		try {
+			cheapHotel = hotelSystem.findCheapestHotel("general","11Sep2020","8Sep2020");
+			Assert.assertEquals("Ridgewood",cheapHotel);
+		} catch (HotelReservationException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

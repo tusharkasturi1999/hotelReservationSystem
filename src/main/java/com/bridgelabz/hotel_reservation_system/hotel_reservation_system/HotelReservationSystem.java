@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.*;
 
@@ -46,25 +47,55 @@ public class HotelReservationSystem {
 		}
 	}
 
+	/*
+	 * method to validate the customer type
+	 */
+	public boolean validateCustomerType(String custType) throws HotelReservationException {
+		String pattern = "^[Rr](egular||eward)$";
+		boolean result = Pattern.matches(pattern, custType);
+		if (result == true) {
+			return true;
+		} else {
+			throw new HotelReservationException(HotelReservationException.ExceptionType.WRONG_CUSTOMER,
+					"Please enter a valid customer Type");
+		}
+	}
+
 	/**
 	 * findCheapestHotel method to find cheapest hotel
 	 * 
 	 * @param lowerRange of date
 	 * @param upperRange of date
+	 * @customerType is a regular or reward customer
 	 * @return cheapest hotel name
+	 * @throws HotelReservationException
 	 */
-	public String findCheapestHotel(String customerType, String lowerRange, String upperRange) {
+	public String findCheapestHotel(String customerType, String lowerRange, String upperRange)
+			throws HotelReservationException {
 
 		HashMap<Hotel, Integer> hotelRateMap = new HashMap<>();
 		int minTotalRate = Integer.MAX_VALUE;
 		Hotel cheapHotel = null;
 		int maxRating = 0;
 		String cheapHotelName = null;
-
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("ddMMMyyyy");
-		LocalDate lower = LocalDate.parse(lowerRange, format);
-		LocalDate upper = LocalDate.parse(upperRange, format);
-		long numDays = Period.between(lower, upper).getDays() + 1;
+		LocalDate lower = null;
+		LocalDate upper = null;
+		long numDays = 0;
+		validateCustomerType(customerType);
+
+		try {
+			lower = LocalDate.parse(lowerRange, format);
+			upper = LocalDate.parse(upperRange, format);
+			numDays = Period.between(lower, upper).getDays() + 1;
+			if (numDays <= 0) {
+				throw new HotelReservationException(HotelReservationException.ExceptionType.WRONG_DATE,
+						"Please enter proper date range");
+			}
+		} catch (Exception e) {
+			throw new HotelReservationException(HotelReservationException.ExceptionType.WRONG_DATE,
+					"Please enter proper date range");
+		}
 
 		List<LocalDate> listOfDates = Stream.iterate(lower, date -> date.plusDays(1)).limit(numDays)
 				.collect(Collectors.toList());
