@@ -11,6 +11,8 @@ public class Hotel {
 	private String hotelName;
 	private int regularCustomerWeekRate;
 	private int regularCustomerWeekendRate;
+	private int rewardCustomerWeekRate;
+	private int rewardCustomerWeekendRate;
 	private int rating;
 
 	public Hotel(String hotelName, int rating, int regularCustomerWeekRate, int regularCustomerWeekendRate) {
@@ -18,6 +20,18 @@ public class Hotel {
 		this.hotelName = hotelName;
 		this.regularCustomerWeekRate = regularCustomerWeekRate;
 		this.regularCustomerWeekendRate = regularCustomerWeekendRate;
+	}
+
+
+	public Hotel(String hotelName, int regularCustomerWeekRate, int regularCustomerWeekendRate,
+			int rewardCustomerWeekRate, int rewardrCustomerWeekendRate, int rating) {
+		super();
+		this.hotelName = hotelName;
+		this.regularCustomerWeekRate = regularCustomerWeekRate;
+		this.regularCustomerWeekendRate = regularCustomerWeekendRate;
+		this.rewardCustomerWeekRate = rewardCustomerWeekRate;
+		this.rewardCustomerWeekendRate = rewardrCustomerWeekendRate;
+		this.rating = rating;
 	}
 
 	public String getHotelName() {
@@ -48,14 +62,32 @@ public class Hotel {
 		return rating;
 	}
 
+	public int getRewardCustomerWeekRate() {
+		return rewardCustomerWeekRate;
+	}
+
+	public void setRewardCustomerWeekRate(int rewardCustomerWeekRate) {
+		this.rewardCustomerWeekRate = rewardCustomerWeekRate;
+	}
+
+	public int getRewardrCustomerWeekendRate() {
+		return rewardCustomerWeekendRate;
+	}
+
+	public void setRewardrCustomerWeekendRate(int rewardrCustomerWeekendRate) {
+		this.rewardCustomerWeekendRate = rewardrCustomerWeekendRate;
+	}
+
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
 
 	@Override
 	public String toString() {
-		return "Hotel [hotelName=" + hotelName + ", regularCustomerWeekRate=" + regularCustomerWeekRate + ", regularCustomerWeekendRate="
-				+ regularCustomerWeekendRate + ", rating=" + rating + "]";
+		return "Hotel [hotelName=" + hotelName + ", regularCustomerWeekRate=" + regularCustomerWeekRate
+				+ ", regularCustomerWeekendRate=" + regularCustomerWeekendRate + ", rewardCustomerWeekRate="
+				+ rewardCustomerWeekRate + ", rewardrCustomerWeekendRate=" + rewardCustomerWeekendRate + ", rating="
+				+ rating + "]";
 	}
 
 }
