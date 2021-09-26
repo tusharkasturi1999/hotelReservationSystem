@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 import java.util.stream.*;
  
 /**
+ * @author tushar.kasturi_ymedi
  * This is the HotelReservationSystem class
- * 
  * @param hotel This is a array list of hotel type
  */
 public class HotelReservationSystem {
@@ -18,7 +18,7 @@ public class HotelReservationSystem {
 	public static ArrayList<Hotel> hotel = new ArrayList<Hotel>();
 
 	// This method is used to add hotel
-	public static boolean addHotel(String hotelName, int rating, int regularCustomerWeekRate,
+	public boolean addHotel(String hotelName, int rating, int regularCustomerWeekRate,
 			int regularCustomerWeekendRate) {
 		hotel.add(new Hotel(hotelName, rating, regularCustomerWeekRate, regularCustomerWeekendRate));
 		return true;
@@ -44,12 +44,19 @@ public class HotelReservationSystem {
 			return false;
 		}
 	}
-	//This method returns the cheapest hotel
-	public static String findCheapestHotel(String lowerRange,String upperRange) {
+	/**
+	 * findCheapestHotel method to find cheapest hotel
+	 * @param lowerRange of date
+	 * @param upperRange of date
+	 * @return cheapest hotel name
+	 */
+	public String findCheapestHotel(String lowerRange,String upperRange) {
 
-		HashMap<String,Integer> hotelRateMap = new HashMap<>();
+		HashMap<Hotel,Integer> hotelRateMap = new HashMap<>();
 		int minTotalRate = Integer.MAX_VALUE;
-		String cheapHotel = null;
+		Hotel cheapHotel = null;
+		int maxRating = 0;
+		String cheapHotelName = null;
 
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("ddMMMyyyy");
 		LocalDate lower = LocalDate.parse(lowerRange, format);
@@ -71,20 +78,28 @@ public class HotelReservationSystem {
 				else
 					totalRate += hotel.getRegularCustomerWeekRate();
 			}
-			hotelRateMap.put(hotel.getHotelName(),totalRate);
+			hotelRateMap.put(hotel,totalRate);
 		}
 
 		for (Map.Entry map : hotelRateMap.entrySet()) {      
 			if(minTotalRate > (int)map.getValue()) 
 			{
 				minTotalRate = (int)map.getValue();
-				cheapHotel = (String)map.getKey();
+				cheapHotel = (Hotel)map.getKey();
+				maxRating = cheapHotel.getRating();
+				cheapHotelName = cheapHotel.getHotelName();
 			}
-			else if(minTotalRate == (int)map.getValue()){
-				cheapHotel = cheapHotel + ","+ map.getKey();
+			else if(minTotalRate == (int)map.getValue())
+			{
+				cheapHotel = (Hotel)map.getKey(); 
+				if(maxRating < cheapHotel.getRating()) {
+					maxRating = cheapHotel.getRating();
+					minTotalRate = (int)map.getValue();	
+					cheapHotelName = cheapHotel.getHotelName();
+				}	
 			}
 		}
-		System.out.println("Cheapest hotel for the given dates is "+cheapHotel+" for $"+minTotalRate);
-		return cheapHotel;
+		System.out.println(cheapHotelName+", Rating:"+maxRating+" and Total Rates: $"+minTotalRate);
+		return cheapHotelName;
 	}
 }
