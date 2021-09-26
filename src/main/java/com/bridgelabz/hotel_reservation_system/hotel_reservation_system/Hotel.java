@@ -24,13 +24,13 @@ public class Hotel {
 
 
 	public Hotel(String hotelName, int regularCustomerWeekRate, int regularCustomerWeekendRate,
-			int rewardCustomerWeekRate, int rewardrCustomerWeekendRate, int rating) {
+			int rewardCustomerWeekRate, int rewardCustomerWeekendRate, int rating) {
 		super();
 		this.hotelName = hotelName;
 		this.regularCustomerWeekRate = regularCustomerWeekRate;
 		this.regularCustomerWeekendRate = regularCustomerWeekendRate;
 		this.rewardCustomerWeekRate = rewardCustomerWeekRate;
-		this.rewardCustomerWeekendRate = rewardrCustomerWeekendRate;
+		this.rewardCustomerWeekendRate = rewardCustomerWeekendRate;
 		this.rating = rating;
 	}
 
@@ -70,12 +70,12 @@ public class Hotel {
 		this.rewardCustomerWeekRate = rewardCustomerWeekRate;
 	}
 
-	public int getRewardrCustomerWeekendRate() {
+	public int getRewardCustomerWeekendRate() {
 		return rewardCustomerWeekendRate;
 	}
 
-	public void setRewardrCustomerWeekendRate(int rewardrCustomerWeekendRate) {
-		this.rewardCustomerWeekendRate = rewardrCustomerWeekendRate;
+	public void setRewardCustomerWeekendRate(int rewardCustomerWeekendRate) {
+		this.rewardCustomerWeekendRate = rewardCustomerWeekendRate;
 	}
 
 	public void setRating(int rating) {
@@ -86,7 +86,7 @@ public class Hotel {
 	public String toString() {
 		return "Hotel [hotelName=" + hotelName + ", regularCustomerWeekRate=" + regularCustomerWeekRate
 				+ ", regularCustomerWeekendRate=" + regularCustomerWeekendRate + ", rewardCustomerWeekRate="
-				+ rewardCustomerWeekRate + ", rewardrCustomerWeekendRate=" + rewardCustomerWeekendRate + ", rating="
+				+ rewardCustomerWeekRate + ", rewardCustomerWeekendRate=" + rewardCustomerWeekendRate + ", rating="
 				+ rating + "]";
 	}
 
